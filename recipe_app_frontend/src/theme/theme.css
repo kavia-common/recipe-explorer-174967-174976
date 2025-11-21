@@ -1,0 +1,173 @@
+:root {
+  /* Ocean Professional Theme Colors */
+  --color-primary: #2563EB;      /* Blue */
+  --color-secondary: #F59E0B;    /* Amber (also used as success/accent) */
+  --color-success: #F59E0B;
+  --color-error: #EF4444;
+
+  /* Base */
+  --bg: #f9fafb;                 /* background */
+  --surface: #ffffff;            /* surface cards/panels */
+  --text: #111827;               /* primary text */
+  --text-muted: #6b7280;         /* secondary text */
+  --border: #e5e7eb;             /* subtle borders */
+
+  /* Elevation / Shadows */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-sm: 0 2px 6px rgba(0,0,0,0.08);
+  --shadow-md: 0 6px 18px rgba(0,0,0,0.10);
+  --shadow-lg: 0 10px 24px rgba(0,0,0,0.14);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(255,255,255,0.9));
+  --gradient-accent: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(255,255,255,0.95));
+  --gradient-hero: linear-gradient(180deg, rgba(37,99,235,0.10), rgba(249,250,251,0.0));
+
+  /* Interactive */
+  --link: var(--color-primary);
+  --focus-ring: 0 0 0 3px rgba(37,99,235,0.35);
+
+  /* Buttons */
+  --btn-bg: var(--color-primary);
+  --btn-text: #ffffff;
+  --btn-bg-hover: #1e4fc6;
+  --btn-bg-active: #183e9d;
+
+  /* Transitions */
+  --transition-fast: 120ms ease;
+  --transition: 200ms ease;
+  --transition-slow: 320ms ease;
+}
+
+/* Dark mode (optional, retains existing dark toggle behavior via data-theme) */
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --surface: #0b1222;
+  --text: #e5e7eb;
+  --text-muted: #94a3b8;
+  --border: #1f2937;
+
+  --gradient-primary: linear-gradient(135deg, rgba(37,99,235,0.18), rgba(15,23,42,0.85));
+  --gradient-hero: linear-gradient(180deg, rgba(37,99,235,0.16), rgba(15,23,42,0.0));
+
+  --btn-bg: #3b82f6;
+  --btn-text: #0b1020;
+  --btn-bg-hover: #2563eb;
+  --btn-bg-active: #1d4ed8;
+
+  --focus-ring: 0 0 0 3px rgba(59,130,246,0.55);
+}
+
+/* Base resets leveraging variables */
+html, body, #root {
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover { color: #1d4ed8; }
+a:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Buttons */
+.btn {
+  appearance: none;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--transition-fast), box-shadow var(--transition), background var(--transition);
+}
+.btn:hover {
+  background: var(--btn-bg-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+.btn:active {
+  background: var(--btn-bg-active);
+  transform: translateY(0);
+  box-shadow: var(--shadow-xs);
+}
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Secondary/Amber button variant */
+.btn-amber {
+  background: var(--color-secondary);
+  color: #111827;
+}
+.btn-amber:hover {
+  filter: brightness(0.95);
+}
+
+/* Inputs */
+input[type="text"], input[type="search"], input:not([type]) {
+  background: transparent;
+  color: var(--text);
+}
+input::placeholder {
+  color: var(--text-muted);
+}
+input:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Cards / Surfaces */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition);
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Utility */
+.container {
+  width: min(1100px, 92vw);
+  margin-inline: auto;
+}
+.text-muted { color: var(--text-muted); }
+.surface { background: var(--surface); }
+.border { border: 1px solid var(--border); border-radius: var(--radius-md); }
+
+/* Header/Nav helpers */
+.nav-active {
+  color: var(--color-primary);
+  background: rgba(37, 99, 235, 0.08);
+  border-radius: var(--radius-sm);
+}

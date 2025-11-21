@@ -21,6 +21,9 @@ function SearchBar({ placeholder = 'Search recipes, e.g. pasta, chicken...', def
     navigate(trimmed ? `/recipes?q=${encodeURIComponent(trimmed)}` : '/recipes');
   };
 
+  const pad = size === 'lg' ? '14px 16px' : '10px 12px';
+  const fontSize = size === 'lg' ? 18 : 16;
+
   return (
     <form onSubmit={onSubmit} role="search" style={{ width: '100%' }}>
       <div
@@ -29,14 +32,15 @@ function SearchBar({ placeholder = 'Search recipes, e.g. pasta, chicken...', def
           gap: 8,
           width: '100%',
           alignItems: 'center',
-          background: 'var(--bg-secondary)',
-          border: '1px solid var(--border-color)',
-          borderRadius: 12,
-          padding: size === 'lg' ? '14px 16px' : '10px 12px',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+          background: 'var(--surface)',
+          border: '1px solid var(--border)',
+          borderRadius: '12px',
+          padding: pad,
+          boxShadow: 'var(--shadow-sm)',
+          transition: 'box-shadow var(--transition)',
         }}
       >
-        <span aria-hidden style={{ color: '#2563EB' }}>🔎</span>
+        <span aria-hidden style={{ color: 'var(--color-primary)' }}>🔎</span>
         <input
           aria-label="Search recipes"
           value={query}
@@ -46,22 +50,17 @@ function SearchBar({ placeholder = 'Search recipes, e.g. pasta, chicken...', def
             flex: 1,
             border: 'none',
             outline: 'none',
-            fontSize: size === 'lg' ? 18 : 16,
+            fontSize,
             background: 'transparent',
-            color: 'var(--text-primary)',
+            color: 'var(--text)',
           }}
         />
         <button
           type="submit"
           className="btn"
           style={{
-            background: '#2563EB',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 10,
+            borderRadius: '10px',
             padding: size === 'lg' ? '10px 14px' : '8px 12px',
-            fontWeight: 600,
-            cursor: 'pointer',
           }}
         >
           Search

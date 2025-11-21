@@ -16,8 +16,8 @@ function Header() {
         top: 0,
         zIndex: 10,
         backdropFilter: 'saturate(180%) blur(8px)',
-        background: 'linear-gradient(180deg, rgba(255,255,255,0.9), rgba(249,250,251,0.8))',
-        borderBottom: '1px solid var(--border-color)',
+        background: 'var(--gradient-primary)',
+        borderBottom: '1px solid var(--border)',
       }}
     >
       <div
@@ -35,7 +35,15 @@ function Header() {
           role="button"
           tabIndex={0}
           onKeyDown={(e) => e.key === 'Enter' && navigate('/')}
-          style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            cursor: 'pointer',
+            padding: '4px 6px',
+            borderRadius: '10px',
+            transition: 'background var(--transition)',
+          }}
         >
           <div
             aria-hidden
@@ -43,11 +51,11 @@ function Header() {
               width: 32,
               height: 32,
               borderRadius: 8,
-              background: 'linear-gradient(135deg, #2563EB, #60A5FA)',
+              background: 'linear-gradient(135deg, var(--color-primary), #60A5FA)',
               boxShadow: '0 4px 14px rgba(37, 99, 235, 0.35)',
             }}
           />
-          <strong style={{ color: 'var(--text-primary)' }}>Recipe Explorer</strong>
+          <strong style={{ color: 'var(--text)' }}>Recipe Explorer</strong>
         </div>
 
         <nav style={{ marginLeft: 'auto', display: 'flex', gap: 16 }}>
@@ -55,13 +63,14 @@ function Header() {
             to="/"
             style={({ isActive }) => ({
               textDecoration: 'none',
-              color: isActive ? '#2563EB' : 'var(--text-primary)',
+              color: isActive ? 'var(--color-primary)' : 'var(--text)',
               fontWeight: 600,
               padding: '6px 10px',
-              borderRadius: 8,
+              borderRadius: '8px',
               background: isActive ? 'rgba(37, 99, 235, 0.08)' : 'transparent',
-              transition: 'all .2s ease',
+              transition: 'all var(--transition-fast)',
             })}
+            className={({ isActive }) => (isActive ? 'nav-active' : undefined)}
           >
             Home
           </NavLink>
@@ -69,13 +78,14 @@ function Header() {
             to="/recipes"
             style={({ isActive }) => ({
               textDecoration: 'none',
-              color: isActive ? '#2563EB' : 'var(--text-primary)',
+              color: isActive ? 'var(--color-primary)' : 'var(--text)',
               fontWeight: 600,
               padding: '6px 10px',
-              borderRadius: 8,
+              borderRadius: '8px',
               background: isActive ? 'rgba(37, 99, 235, 0.08)' : 'transparent',
-              transition: 'all .2s ease',
+              transition: 'all var(--transition-fast)',
             })}
+            className={({ isActive }) => (isActive ? 'nav-active' : undefined)}
           >
             Recipes
           </NavLink>
@@ -83,13 +93,14 @@ function Header() {
             to="/favorites"
             style={({ isActive }) => ({
               textDecoration: 'none',
-              color: isActive ? '#2563EB' : 'var(--text-primary)',
+              color: isActive ? 'var(--color-primary)' : 'var(--text)',
               fontWeight: 600,
               padding: '6px 10px',
-              borderRadius: 8,
+              borderRadius: '8px',
               background: isActive ? 'rgba(37, 99, 235, 0.08)' : 'transparent',
-              transition: 'all .2s ease',
+              transition: 'all var(--transition-fast)',
             })}
+            className={({ isActive }) => (isActive ? 'nav-active' : undefined)}
           >
             Favorites
           </NavLink>

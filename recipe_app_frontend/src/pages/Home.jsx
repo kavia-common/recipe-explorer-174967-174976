@@ -19,7 +19,7 @@ function Home() {
       <h1 className="title" style={{ marginBottom: 8 }}>
         Discover delicious recipes
       </h1>
-      <p className="subtitle" style={{ marginTop: 0, color: '#6b7280' }}>
+      <p className="subtitle" style={{ marginTop: 0, color: 'var(--text-muted)' }}>
         Search by ingredients, cuisine, or dish name.
       </p>
       <SearchBar size="lg" />

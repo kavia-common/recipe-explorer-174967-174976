@@ -72,8 +72,8 @@ function RecipeDetails() {
         style={{
           borderRadius: 16,
           overflow: 'hidden',
-          border: '1px solid var(--border-color)',
-          background: 'var(--bg-secondary)',
+          border: '1px solid var(--border)',
+          background: 'var(--surface)',
         }}
       >
         {recipe.image ? (
@@ -89,16 +89,11 @@ function RecipeDetails() {
         <button
           onClick={toggleFavorite}
           aria-pressed={isFavorite}
-          className="btn"
+          className={`btn ${isFavorite ? 'btn-amber' : ''}`}
           style={{
             marginLeft: 'auto',
-            background: isFavorite ? '#F59E0B' : '#2563EB',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 10,
+            borderRadius: '10px',
             padding: '10px 14px',
-            fontWeight: 600,
-            cursor: 'pointer',
           }}
         >
           {isFavorite ? '★ Favorited' : '☆ Add to Favorites'}
@@ -106,7 +101,7 @@ function RecipeDetails() {
       </header>
       <section>
         <h2 style={{ fontSize: 18, marginTop: 0 }}>About this recipe</h2>
-        <p style={{ color: '#374151' }}>{recipe.description || 'No description provided.'}</p>
+        <p style={{ color: 'var(--text-muted)' }}>{recipe.description || 'No description provided.'}</p>
       </section>
     </article>
   );

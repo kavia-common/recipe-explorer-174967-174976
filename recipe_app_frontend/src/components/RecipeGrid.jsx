@@ -17,7 +17,7 @@ function RecipeGrid({ recipes = [], favorites = new Set(), onToggleFavorite }) {
       style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-        gap: 16,
+        gap: '16px',
       }}
     >
       {recipes.map((r) => (

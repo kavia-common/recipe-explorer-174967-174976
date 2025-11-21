@@ -13,9 +13,9 @@ function ErrorMessage({ message }) {
       role="alert"
       style={{
         padding: 16,
-        background: '#FEF2F2',
-        color: '#991B1B',
-        border: '1px solid #FECACA',
+        background: 'rgba(239, 68, 68, 0.08)',
+        color: 'var(--color-error)',
+        border: '1px solid rgba(239, 68, 68, 0.4)',
         borderRadius: 12,
         margin: '12px 0',
       }}
