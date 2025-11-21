@@ -1,4 +1,4 @@
-# Recipe App Frontend Architecture
+# Recipe Pro Frontend Architecture
 
 ## Overview and Goals
 The Recipe App frontend is a lightweight React application for browsing, searching, and managing recipes. It provides a clean UI to:
