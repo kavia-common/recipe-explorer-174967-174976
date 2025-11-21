@@ -1,8 +1,21 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../App';
 import { RecipesProvider } from '../state/RecipesContext';
+
+// Ensure env resolver will return empty base URL to trigger mock mode for routing tests as well.
+const ORIGINAL_ENV = { ...process.env };
+
+beforeEach(() => {
+  delete process.env.REACT_APP_API_BASE;
+  delete process.env.REACT_APP_BACKEND_URL;
+});
+
+afterAll(() => {
+  process.env = ORIGINAL_ENV;
+});
 
 // Utility to render the App with a MemoryRouter starting at the given route
 function renderAt(route = '/') {
@@ -16,10 +29,11 @@ function renderAt(route = '/') {
 }
 
 describe('Routing and Header navigation', () => {
-  test('Home route "/" renders Home page content', () => {
+  test('Home route "/" renders Home page content', async () => {
     renderAt('/');
     expect(screen.getByText(/Recipe Explorer/i)).toBeInTheDocument();
-    expect(screen.getByText(/Discover delicious recipes/i)).toBeInTheDocument();
+    // Use findBy* to await initial rendering that might depend on effects
+    expect(await screen.findByText(/Discover delicious recipes/i)).toBeInTheDocument();
     // Home has big search bar
     expect(screen.getByRole('search')).toBeInTheDocument();
   });
@@ -28,9 +42,7 @@ describe('Routing and Header navigation', () => {
     renderAt('/recipes');
     // Loading indicator first
     expect(await screen.findByText(/Finding tasty recipes/i)).toBeInTheDocument();
-    // After mock fetch completes, since mock runs sync in our code path with no API, loading will be replaced
-    // The page will either show grid or empty state. We can assert the empty state is not shown for default mock.
-    // We have mock data with items, so we expect any of those titles to appear.
+    // After mock fetch completes, a known recipe should appear
     expect(await screen.findByText(/Spaghetti Carbonara/i)).toBeInTheDocument();
   });
 
@@ -44,6 +56,8 @@ describe('Routing and Header navigation', () => {
   test('Header links navigate to Home, Recipes, and Favorites', async () => {
     renderAt('/recipes');
 
+    const user = userEvent.setup();
+
     // Links in header
     const homeLink = screen.getByRole('link', { name: /home/i });
     const recipesLink = screen.getByRole('link', { name: /recipes/i });
@@ -54,15 +68,15 @@ describe('Routing and Header navigation', () => {
     expect(favoritesLink).toBeInTheDocument();
 
     // Click Favorites and expect Favorites page
-    favoritesLink.click();
+    await user.click(favoritesLink);
     expect(await screen.findByText(/Your Favorites/i)).toBeInTheDocument();
 
     // Click Home and expect home hero text
-    homeLink.click();
+    await user.click(homeLink);
     expect(await screen.findByText(/Discover delicious recipes/i)).toBeInTheDocument();
 
     // Click Recipes and expect a known recipe
-    recipesLink.click();
+    await user.click(recipesLink);
     expect(await screen.findByText(/Spaghetti Carbonara/i)).toBeInTheDocument();
   });
 });
