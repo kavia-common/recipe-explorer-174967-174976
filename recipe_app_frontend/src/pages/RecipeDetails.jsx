@@ -2,13 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
-
-const MOCK_RECIPES = [
-  { id: '1', title: 'Spaghetti Carbonara', image: 'https://picsum.photos/seed/carbonara/900/600', description: 'Classic Italian pasta with eggs, cheese, pancetta, and pepper.' },
-  { id: '2', title: 'Grilled Chicken Salad', image: 'https://picsum.photos/seed/chicken/900/600', description: 'Healthy salad with grilled chicken, greens, and a zesty dressing.' },
-  { id: '3', title: 'Avocado Toast', image: 'https://picsum.photos/seed/avocado/900/600', description: 'Crunchy sourdough topped with smashed avocado and chili flakes.' },
-  { id: '4', title: 'Tomato Soup', image: 'https://picsum.photos/seed/tomato/900/600', description: 'Creamy tomato soup with basil and a hint of garlic.' },
-];
+import { getRecipeById } from '../api/recipesApi';
 
 function getFavorites() {
   try {
@@ -44,20 +38,10 @@ function RecipeDetails() {
       setLoading(true);
       setErr('');
       try {
-        const base = process.env.REACT_APP_API_BASE || process.env.REACT_APP_BACKEND_URL;
-        if (base) {
-          const url = `${base.replace(/\/$/, '')}/recipes/${encodeURIComponent(id)}`;
-          const res = await fetch(url);
-          if (!res.ok) throw new Error(`API error ${res.status}`);
-          const data = await res.json();
-          if (!cancelled) setRecipe(data);
-        } else {
-          // mock lookup
-          const found = MOCK_RECIPES.find((r) => String(r.id) === String(id));
-          if (!cancelled) setRecipe(found || null);
-        }
+        const data = await getRecipeById(id);
+        if (!cancelled) setRecipe(data);
       } catch (e) {
-        if (!cancelled) setErr(e.message || 'Failed to load recipe');
+        if (!cancelled) setErr(e?.message || 'Failed to load recipe');
       } finally {
         if (!cancelled) setLoading(false);
       }

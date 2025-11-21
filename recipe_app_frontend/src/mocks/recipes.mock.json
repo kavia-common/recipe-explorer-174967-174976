@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "title": "Spaghetti Carbonara",
+    "image": "https://picsum.photos/seed/carbonara/900/600",
+    "description": "Classic Italian pasta with eggs, cheese, pancetta, and pepper."
+  },
+  {
+    "id": "2",
+    "title": "Grilled Chicken Salad",
+    "image": "https://picsum.photos/seed/chicken/900/600",
+    "description": "Healthy salad with grilled chicken, greens, and a zesty dressing."
+  },
+  {
+    "id": "3",
+    "title": "Avocado Toast",
+    "image": "https://picsum.photos/seed/avocado/900/600",
+    "description": "Crunchy sourdough topped with smashed avocado and chili flakes."
+  },
+  {
+    "id": "4",
+    "title": "Tomato Soup",
+    "image": "https://picsum.photos/seed/tomato/900/600",
+    "description": "Creamy tomato soup with basil and a hint of garlic."
+  }
+]
