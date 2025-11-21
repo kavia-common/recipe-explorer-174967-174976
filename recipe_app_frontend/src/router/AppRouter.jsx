@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Recipes from '../pages/Recipes';
 import RecipeDetails from '../pages/RecipeDetails';
@@ -9,6 +9,7 @@ import Header from '../components/Header';
 /**
  * PUBLIC_INTERFACE
  * AppRouter sets up client-side routing for the Recipe App.
+ * This component assumes it is rendered within a Router provider (e.g., BrowserRouter).
  * Routes:
  * - "/": Home page with prominent search
  * - "/recipes": Recipes list with optional query param ?q=
@@ -17,7 +18,7 @@ import Header from '../components/Header';
  */
 function AppRouter() {
   return (
-    <BrowserRouter>
+    <>
       <Header />
       <main className="container" style={{ paddingTop: 24, paddingBottom: 48 }}>
         <Routes>
@@ -27,7 +28,7 @@ function AppRouter() {
           <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </main>
-    </BrowserRouter>
+    </>
   );
 }
 
