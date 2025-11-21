@@ -1,9 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import { MemoryRouter } from 'react-router-dom';
+import { RecipesProvider } from './state/RecipesContext';
 
 // Smoke test: mounts the app and confirms Header and nav links render
 test('renders header brand and navigation links', () => {
-  render(<App />);
+  render(
+    <MemoryRouter initialEntries={['/']}>
+      <RecipesProvider>
+        <App />
+      </RecipesProvider>
+    </MemoryRouter>
+  );
 
   // Brand title
   expect(screen.getByText(/Recipe Explorer/i)).toBeInTheDocument();
