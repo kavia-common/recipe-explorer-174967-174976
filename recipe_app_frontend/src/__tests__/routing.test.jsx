@@ -41,7 +41,7 @@ describe('Routing and Header navigation', () => {
   test('Recipes route "/recipes" renders Recipes page content', async () => {
     renderAt('/recipes');
     // Loading indicator first
-    expect(await screen.findByText(/Finding tasty recipes/i)).toBeInTheDocument();
+    expect(await screen.findByRole('status')).toHaveTextContent(/finding tasty recipes/i);
     // After mock fetch completes, a known recipe should appear
     expect(await screen.findByText(/Spaghetti Carbonara/i)).toBeInTheDocument();
   });
