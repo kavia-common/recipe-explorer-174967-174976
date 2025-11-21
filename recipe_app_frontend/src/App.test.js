@@ -1,8 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders app header brand', () => {
+// Smoke test: mounts the app and confirms Header and nav links render
+test('renders header brand and navigation links', () => {
   render(<App />);
-  const brand = screen.getByText(/Recipe Explorer/i);
-  expect(brand).toBeInTheDocument();
+
+  // Brand title
+  expect(screen.getByText(/Recipe Explorer/i)).toBeInTheDocument();
+
+  // Navigation links
+  expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /recipes/i })).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /favorites/i })).toBeInTheDocument();
 });
